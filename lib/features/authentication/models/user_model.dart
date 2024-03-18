@@ -32,7 +32,7 @@ class User {
       email: map['email'] as String,
       name: map['name'] as String,
       photoUrl: map['photoUrl'] as String,
-      token: map['token'] as String,
+      token: map['access_token'] as String,
     );
   }
 

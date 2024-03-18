@@ -9,22 +9,25 @@ sealed class AuthState extends Equatable {
 
 class AuthAuthenticated extends AuthState {
   final User user;
+  final List<Document> userDocuments;
 
   AuthAuthenticated({
+    this.userDocuments = const [],
     required this.user,
   });
 
   AuthAuthenticated copyWith({
     User? user,
-    String? token,
+    List<Document>? userDocuments,
   }) {
     return AuthAuthenticated(
       user: user ?? this.user,
+      userDocuments: userDocuments ?? this.userDocuments,
     );
   }
 
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [user, userDocuments];
 }
 
 final class AuthUnauthenticated extends AuthState {}
@@ -33,3 +36,5 @@ final class AuthError extends AuthState {
   final String message;
   AuthError(this.message);
 }
+
+final class AuthLoading extends AuthState {}

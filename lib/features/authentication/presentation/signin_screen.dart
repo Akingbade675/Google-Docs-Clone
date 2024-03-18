@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_docs_clone/config/app_icons.dart';
 import 'package:google_docs_clone/features/authentication/bloc/cubit/auth_cubit.dart';
-import 'package:google_docs_clone/features/authentication/presentation/home_screen.dart';
 import 'package:google_docs_clone/styles/app_colors.dart';
 import 'package:routemaster/routemaster.dart';
 

@@ -7,21 +7,30 @@ class HttpClient {
   final Client _client;
 
   HttpClient({required Client client}) : _client = client;
-  Future<dynamic> get(String url, {Map<String, String>? headers}) async {
+  Future<dynamic> get(String url,
+      {String? token, Map<String, String>? headers}) async {
     return await _handleResquest(
       () => _client.get(
         Uri.parse('${AppConfig.baseUrl}$url'),
-        headers: _getHeaders(headers ?? {}),
+        headers: _getHeaders(
+          headers ?? (token == null ? {} : {'Authorization': 'Bearer $token'}),
+        ),
       ),
     );
   }
 
-  Future<String> post(String url,
-      {Map<String, String>? headers, Map<String, String>? body}) async {
+  Future<String> post(
+    String url, {
+    String? token,
+    Map<String, String>? headers,
+    Map<String, String>? body,
+  }) async {
     return await _handleResquest(
       () => _client.post(
         Uri.parse('${AppConfig.baseUrl}$url'),
-        headers: _getHeaders(headers ?? {}),
+        headers: _getHeaders(
+          headers ?? (token == null ? {} : {'Authorization': 'Bearer $token'}),
+        ),
         body: jsonEncode(body),
       ),
     );
@@ -40,7 +49,7 @@ class HttpClient {
       } else {
         // ignore: avoid_print
         print(response.body);
-        throw Exception(response.body);
+        throw Exception(jsonDecode(response.body)['message']);
       }
     } on Exception catch (e) {
       // ignore: avoid_print
@@ -51,8 +60,24 @@ class HttpClient {
 
   // Future<dynamic> put(String url, {Map<String, String> headers, dynamic body});
 
-  // Future<dynamic> delete(String url, {Map<String, String> headers});
+  Future<dynamic> delete(String url,
+      {required String token, Map<String, String>? headers}) async {
+    return await _handleResquest(
+      () => _client.delete(
+        Uri.parse('${AppConfig.baseUrl}$url'),
+        headers: _getHeaders(headers ?? {'Authorization': 'Bearer $token'}),
+      ),
+    );
+  }
 
-  // Future<dynamic> patch(String url,
-  //     {Map<String, String> headers, dynamic body});
+  Future<dynamic> patch(String url,
+      {required String token,
+      Map<String, String>? headers,
+      dynamic body}) async {
+    return await _handleResquest(() => _client.patch(
+          Uri.parse('${AppConfig.baseUrl}$url'),
+          headers: _getHeaders(headers ?? {'Authorization': 'Bearer $token'}),
+          body: jsonEncode(body),
+        ));
+  }
 }

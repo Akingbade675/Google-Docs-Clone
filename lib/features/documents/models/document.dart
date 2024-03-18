@@ -5,14 +5,16 @@ import 'package:equatable/equatable.dart';
 
 class Document extends Equatable {
   final String id;
-  final List<String> content;
+  final String title;
+  final List<dynamic> content;
   final String authorId;
   final DateTime createdAt;
   final DateTime openedAt;
 
   const Document({
+    required this.title,
     required this.id,
-    required this.content,
+    this.content = const [],
     required this.authorId,
     required this.createdAt,
     required this.openedAt,
@@ -20,13 +22,15 @@ class Document extends Equatable {
 
   Document copyWith({
     String? id,
-    List<String>? content,
+    String? title,
+    List<dynamic>? content,
     String? authorId,
     DateTime? createdAt,
     DateTime? openedAt,
   }) {
     return Document(
       id: id ?? this.id,
+      title: title ?? this.title,
       content: content ?? this.content,
       authorId: authorId ?? this.authorId,
       createdAt: createdAt ?? this.createdAt,
@@ -37,20 +41,25 @@ class Document extends Equatable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'title': title,
       'content': content,
       'authorId': authorId,
-      'createdAt': createdAt.millisecondsSinceEpoch,
-      'openedAt': openedAt.millisecondsSinceEpoch,
+      'createdAt': createdAt.toString(),
+      'openedAt': openedAt.toString(),
     };
   }
 
   factory Document.fromMap(Map<String, dynamic> map) {
     return Document(
       id: map['id'] as String,
-      content: List<String>.from((map['content'] as List<String>)),
-      authorId: map['authorId'] as String,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
-      openedAt: DateTime.fromMillisecondsSinceEpoch(map['openedAt'] as int),
+      title: map['title'] as String,
+      content: map['content'] == null
+          ? []
+          : List<String>.from(map['content'] as List<dynamic>),
+      authorId: map['authorId'] == null ? '' : map['authorId'] as String,
+      createdAt: DateTime.parse(map['createdAt'] as String),
+      openedAt: DateTime.parse(map['openedAt'] as String),
+      // openedAt: DateTime.fromMillisecondsSinceEpoch(map['openedAt'] as int),
     );
   }
 
@@ -61,14 +70,15 @@ class Document extends Equatable {
 
   @override
   String toString() {
-    return 'Document(id: $id, content: $content, authorId: $authorId, createdAt: $createdAt, openedAt: $openedAt)';
+    return 'Document(id: $id, title: $title, content: $content, authorId: $authorId, createdAt: $createdAt, openedAt: $openedAt)';
   }
 
   @override
   List<Object> get props {
     return [
       id,
-      content,
+      title,
+      // content,
       authorId,
       createdAt,
       openedAt,
