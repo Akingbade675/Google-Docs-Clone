@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_docs_clone/features/authentication/bloc/cubit/auth_cubit.dart';
-import 'package:google_docs_clone/features/documents/cubit/documents_cubit.dart';
 import 'package:google_docs_clone/styles/app_colors.dart';
 import 'package:routemaster/routemaster.dart';
 

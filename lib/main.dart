@@ -21,7 +21,7 @@ void main() {
         ),
         RepositoryProvider(
           create: (context) => AuthRepository(
-            googleSignIn: GoogleSignIn(),
+            googleSignIn: GoogleSignIn(scopes: ['email', 'profile']),
             client: RepositoryProvider.of<HttpClient>(context),
           ),
         ),

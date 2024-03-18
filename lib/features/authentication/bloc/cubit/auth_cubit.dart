@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:google_docs_clone/core/services/secure_storage_service.dart';
+import 'package:google_docs_clone/core/services/secure_storage.service.dart';
 import 'package:google_docs_clone/features/authentication/models/user_model.dart';
 import 'package:google_docs_clone/features/authentication/repository/auth_repository.dart';
 import 'package:google_docs_clone/features/documents/models/document.dart';

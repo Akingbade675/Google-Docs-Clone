@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:google_docs_clone/config/app_config.dart';
-import 'package:google_docs_clone/features/authentication/bloc/cubit/auth_cubit.dart';
 import 'package:google_docs_clone/features/documents/cubit/document_edit_cubit.dart';
 import 'package:google_docs_clone/features/documents/cubit/documents_cubit.dart';
 import 'package:google_docs_clone/features/documents/models/document.dart'
